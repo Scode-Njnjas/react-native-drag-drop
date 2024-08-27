@@ -100,7 +100,7 @@ class Draggable extends Component<DraggableProps, DraggableState> {
     }
   };
 
-  onPress = _.debounce(this.onClickItem, 300);
+  onPress = debounce(this.onClickItem, 300);
 
   handleTouch = (val: boolean) => {
     this.setState({ pressed: val }, () => {});

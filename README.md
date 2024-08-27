@@ -1,21 +1,32 @@
-# volkeno-react-native-drag-drop
+<h1 align="center">
+  React Native Drag and Drop
+</h1>
 
-![Usage](https://raw.githubusercontent.com/VolkenoMakers/react-native-drag-drop/files/demo.gif)
+Inspired by the [volkeno-react-native-drag-drop](https://github.com/VolkenoMakers/react-native-drag-drop) project, I decided to recreate the same functionality in React Native, with updated features and enhancements beyond the original project.
 
-## Add it to your project
+# Demo
+| With Single Column                                                                                         | With Multiple Columns                                                                                          |
+| ---------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| ![With Single Column](https://github.com/user-attachments/assets/a259531d-a811-43f4-9610-2a4f81ce9999) | ![With Multiple Columns](https://github.com/user-attachments/assets/7933bec4-7fd4-498a-883f-7e39e9146887) |
 
-- Using NPM
-  `npm install volkeno-react-native-drag-drop`
-- or:
-- Using Yarn
-  `yarn add volkeno-react-native-drag-drop`
+## Installation
+
+- Using NPM:
+  ```bash
+  npm install https://github.com/Scode-Njnjas/react-native-drag-drop
+  ```
+  
+- Using Yarn:
+  ```bash
+  yarn add https://github.com/Scode-Njnjas/react-native-drag-drop
+  ```
 
 ## Usage
 
 ```javascript
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import DragAndDrop from "volkeno-react-native-drag-drop";
+import DragAndDrop from "react-native-drag-drop";
 
 export default function App() {
   const [items, setItems] = React.useState([
@@ -46,9 +57,9 @@ export default function App() {
       items={items}
       itemsContainerStyle={styles.itemsContainerStyle}
       zonesContainerStyle={styles.zonesContainerStyle}
-      onMaj={(zones, items) => {
-        setItems(items);
-        setZones(zones);
+      onMaj={(updatedZones, updatedItems) => {
+        setItems(updatedItems);
+        setZones(updatedZones);
       }}
       itemsInZoneStyle={styles.itemsInZoneStyle}
       renderItem={(item) => {
@@ -66,7 +77,7 @@ export default function App() {
               backgroundColor: hover ? "#E2E2E2" : "#FFF",
             }}
           >
-            <Text stylae={styles.dragZoneTextStyle}>{zone.text}</Text>
+            <Text style={styles.dragZoneTextStyle}>{zone.text}</Text>
             {children}
           </View>
         );
@@ -130,37 +141,37 @@ const styles = StyleSheet.create({
 });
 ```
 
-## Properties
+## Component Properties
 
-| Property name              | Type               | Description                                                                                                |
+| Property Name              | Type               | Description                                                                                                |
 | -------------------------- | ------------------ | ---------------------------------------------------------------------------------------------------------- |
-| **style**                  | _Object_           | Custom style for ScrollView component                                                                      |
+| **style**                  | _Object_           | Custom style for the ScrollView component                                                                  |
 | **draggedElementStyle**    | _Object_           | Custom style for the dragged item                                                                          |
-| **maxItemsPerZone**        | _Number_           | max items inside a drop area default to null (no limit)                                                    |
-| **itemsInZoneDisplay**     | _row_ or _collumn_ | the flex direction for the container of items inside a zone                                                |
-| **itemsDisplay**           | _row_ or _collumn_ | the flex direction for the container of items                                                              |
-| **itemsNumCollumns**       | _Number_           | the number of collumns for items                                                                           |
-| **itemsInZoneNumCollumns** | _Number_           | the number of collumns for items inside a zone                                                             |
-| **headerComponent**        | **ReactElement**   | render a header                                                                                            |
-| **footerComponent**        | **ReactElement**   | render a footer                                                                                            |
-| **contentContainerStyle**  | _Object_           | Custom style for ScrollView contentContainerStyle                                                          |
-| **itemKeyExtractor**       | _Function_         | function that take an item as a parameter then return the id of the item                                   |
-| **zoneKeyExtractor**       | _Function_         | function that take a zone as a parameter then return the id of the item                                    |
-| **zones**                  | _Array_            | array contains the drops area                                                                              |
-| **items**                  | _Array_            | array contains draggable items                                                                             |
-| **itemsContainerStyle**    | _Object_           | Custom style for the container of the draggable items                                                      |
+| **maxItemsPerZone**        | _Number_           | Maximum items inside a drop area, defaults to null (no limit)                                               |
+| **itemsInZoneDisplay**     | _"row"_ or _"column"_ | Flex direction for the container of items inside a zone                                                    |
+| **itemsDisplay**           | _"row"_ or _"column"_ | Flex direction for the container of draggable items                                                        |
+| **itemsNumColumns**        | _Number_           | Number of columns for items                                                                                |
+| **itemsInZoneNumColumns**  | _Number_           | Number of columns for items inside a zone                                                                  |
+| **headerComponent**        | _ReactElement_     | Renders a header                                                                                            |
+| **footerComponent**        | _ReactElement_     | Renders a footer                                                                                            |
+| **contentContainerStyle**  | _Object_           | Custom style for the ScrollView `contentContainerStyle`                                                     |
+| **itemKeyExtractor**       | _Function_         | Function that takes an item as a parameter and returns the item's ID                                        |
+| **zoneKeyExtractor**       | _Function_         | Function that takes a zone as a parameter and returns the zone's ID                                         |
+| **zones**                  | _Array_            | Array that contains the drop zones                                                                         |
+| **items**                  | _Array_            | Array that contains the draggable items                                                                    |
+| **itemsContainerStyle**    | _Object_           | Custom style for the container of draggable items                                                          |
 | **zonesContainerStyle**    | _Object_           | Custom style for the container of the drop zones                                                           |
-| **itemsInZoneStyle**       | _Object_           | Custom style for the item in the drop area                                                                 |
-| **onMaj**                  | _Function_         | The callback function trigger when there are changes on the items or the zones                             |
-| **renderItem**             | _Function_         | Function to render an item                                                                                 |
-| **renderZone**             | _Function_         | Function to render a drop zone **important** the chidren parameter is the draggable items in the drop area |
+| **itemsInZoneStyle**       | _Object_           | Custom style for the items in the drop area                                                                |
+| **onMaj**                  | _Function_         | Callback function triggered when there are changes in items or zones                                        |
+| **renderItem**             | _Function_         | Function to render a draggable item                                                                        |
+| **renderZone**             | _Function_         | Function to render a drop zone (important: the `children` parameter is the draggable items inside the drop zone) |
 
-## Usage with multiple collumns
+## Usage with Multiple Columns
 
 ```javascript
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import DragAndDrop from "volkeno-react-native-drag-drop";
+import DragAndDrop from "react-native-drag-drop";
 
 export function DragDropModule() {
   const [items, setItems] = React.useState([
@@ -190,14 +201,14 @@ export function DragDropModule() {
       zoneKeyExtractor={(zone) => zone.id}
       zones={zones}
       items={items}
-      onMaj={(zones, items) => {
-        setItems(items);
-        setZones(zones);
+      onMaj={(updatedZones, updatedItems) => {
+        setItems(updatedItems);
+        setZones(updatedZones);
       }}
       itemsInZoneDisplay="row"
       itemsDisplay="row"
-      itemsNumCollumns={3}
-      itemsInZoneNumCollumns={2}
+      itemsNumColumns={3}
+      itemsInZoneNumColumns={2}
       renderItem={(item) => {
         return (
           <View style={styles.dragItemStyle}>
@@ -229,9 +240,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
   contentContainerStyle: {
-    padding: 20,
+    padding: 20
+
+,
     paddingTop: 40,
   },
   dragItemStyle: {
@@ -255,7 +267,5 @@ const styles = StyleSheet.create({
   },
 });
 ```
-
-![Usage with multiple collumns](https://raw.githubusercontent.com/VolkenoMakers/react-native-drag-drop/files/demo1.gif)
 
 **ISC Licensed**
